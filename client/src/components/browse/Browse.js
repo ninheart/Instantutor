@@ -31,16 +31,15 @@ const Browse = ({
     return (
       <div>
         <h1 className='large text-primary'>
-          {selectedRole
-            ? 'Browse student requests'
-            : 'Browse tutors'}
+          {selectedRole ? 'Browse student requests' : 'Browse tutors'}
         </h1>
-        {!selectedRole ? <Search/> : null}
         <RoleButton
           role={profile ? profile.role : false}
           toggledRole={selectedRole}
           setRollToggle={toggleSelectedRole}
         />
+        {!selectedRole ? <Search /> : null}
+
         {!selectedRole
           ? profiles.map((profile, num) => (
               <TutorItem profile={profile} key={num} />

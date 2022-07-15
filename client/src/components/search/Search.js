@@ -46,19 +46,8 @@ const Search = ({obtainResults,autoSuggestion, suggested_list = [],result_profil
                         setSearchData={setSearchData}
                         onChange={onChange}
                     />
-                    <div>
-                        <select name="role" value={role} onChange={onChange}>
-                            <option value="Student">Student</option>
-                            <option value="Tutor">Tutor</option>
-                            <option value="">Either</option>
-                        </select>
-
-                        <small className="form-text">
-                            You want to search a Tutor or a Student?
-                        </small>
-                    </div>
                 </div>
-                    
+
                 <input type="submit" className="btn btn-primary my-1" />
 
                 <Link className="btn btn-light my-1" to="/dashboard">
@@ -67,7 +56,6 @@ const Search = ({obtainResults,autoSuggestion, suggested_list = [],result_profil
             </form>
             <div className='profiles'>
                 {result_profiles && result_profiles.length > 0 ? (
-                    
                     result_profiles.map(profile => (
                         <SearchResultItem key={profile._id} profile={profile} />
                     ))
