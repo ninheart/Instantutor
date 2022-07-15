@@ -5,6 +5,7 @@ import RequestItem from './RequestItem'
 import RoleButton from '../layout/RoleButton'
 import { getTutors, getCurrentProfile } from '../../actions/profile'
 import { getOpenPeerRequests } from '../../actions/request'
+import Search from '../search/Search'
 
 const Browse = ({ 
     profile: { profile },
@@ -22,24 +23,32 @@ const Browse = ({
 
     // by default role is false indicating student
     var role = false;
-    if (profile && profile.role && profile.role === "tutor")
+    if (profile && profile.role === 'Tutor')
         role = true;
 
     const [selectedRole, toggleSelectedRole] = useState(role);
 
     return (
-        <div>
-            <h1 className="large text-primary">
-                {selectedRole ? "Browse student requests" : "Browse tutors"}
-            </h1>
-            <RoleButton 
-                role={profile ? profile.role : false}
-                toggledRole={selectedRole}
-                setRollToggle={toggleSelectedRole} /> 
-            { !selectedRole ? 
-                profiles.map((profile, num) => <TutorItem profile={profile} key={num} />) :
-                open_requests.map((request, num) => <RequestItem peer_request={request} key={num} />)}
-        </div>
+      <div>
+        <h1 className='large text-primary'>
+          {selectedRole
+            ? 'Browse student requests'
+            : 'Browse tutors'}
+        </h1>
+        {!selectedRole ? <Search/> : null}
+        <RoleButton
+          role={profile ? profile.role : false}
+          toggledRole={selectedRole}
+          setRollToggle={toggleSelectedRole}
+        />
+        {!selectedRole
+          ? profiles.map((profile, num) => (
+              <TutorItem profile={profile} key={num} />
+            ))
+          : open_requests.map((request, num) => (
+              <RequestItem peer_request={request} key={num} />
+            ))}
+      </div>
     )
 }
 
